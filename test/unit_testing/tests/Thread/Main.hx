@@ -1,13 +1,8 @@
 package;
 
-import cxx.std.Thread;
-import cxx.std.Duration;
-
-function thread_func(thread_id:Int):Void {
-    trace("Thread " + thread_id + " with ID" + Thread.getID() + " started");
-	final sleep_time:Duration = 2;
-    Thread.sleep(sleep_time.toSeconds());
-	trace("Thread " + thread_id + " with ID" + Thread.getID() + " finished");
+function thread_func() {
+	trace("Thread " + Thread.currentThread().getID() + " started");
+	trace("Thread " + Thread.currentThread().getID() + " finished");
 }
 
 function main() {
