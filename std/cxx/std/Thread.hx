@@ -12,7 +12,7 @@ import chrono.Duration;
 @:valueType
 extern class Thread {
     @:nativeFunctionCode("new std::thread({func})")
-    public extenr function new(func:Void->Void);
+    public extern function new(func:Void->Void);
 
 	@:nativeFunctionCode("new std::thread({func}, {args})")
 	public extern function new(func:Void->Void, args:Dynamic);
