@@ -50,6 +50,10 @@ extern class Stdlib {
 	@:include("thread", true)
 	public static extern function sleep(duration: cxx.std.chrono.Duration): Void;
 
+	@:native("std::this_thread::get_id")
+	@:include("thread", true)
+	public static extern function getThreadID(): Int;
+
 	@:native("std::setlocale")
 	@:include("clocale", true)
 	public static extern function setLocale(category: Int, locale: cxx.ConstCharPtr): cxx.Ptr<cxx.Char>;
