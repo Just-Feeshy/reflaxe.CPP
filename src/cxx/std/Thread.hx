@@ -12,10 +12,10 @@ import chrono.Duration;
 @:valueType
 extern class Thread {
     @:nativeFunctionCode("new std::thread({func})")
-    public extern function new(func:Void->Void);
+    public function overload extern new(func:Void->Void);
 
 	@:nativeFunctionCode("new std::thread({func}, {args})")
-	public extern function new(func:Void->Void, args:Dynamic);
+	public function overload extern new(func:Void->Void, args:Dynamic);
 
 
 	@:const @:noExcept public function joinable():Bool;
@@ -29,8 +29,8 @@ extern class Thread {
     public static overload extern function hardwareConcurrency():Int;
 
 	@:native("std::this_thread::sleep_for")
-    public static overload function sleep(sleep_duration:cxx.Ref<Duraction>):Void;
+    public static overload extern function sleep(sleep_duration:cxx.Ref<Duration>):Void;
 
 	@:native("std::this_thread::get_id")
-    public static overload function getID():Int;
+    public static overload extern function getID():Int;
 }
