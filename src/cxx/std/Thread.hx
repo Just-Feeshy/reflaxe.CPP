@@ -15,6 +15,7 @@ extern class Thread {
     public function overload extern new(func:Void->Void);
 
 	@:nativeFunctionCode("new std::thread({func}, {args})")
+    @:overload(function(func:Void->Void):Void {})
 	public function overload extern new(func:Void->Void, args:Dynamic);
 
 
@@ -27,9 +28,6 @@ extern class Thread {
 
 	@:native("std::thread::hardware_concurrency")
     public static overload extern function hardwareConcurrency():Int;
-
-	@:native("std::this_thread::sleep_for")
-    public static overload extern function sleep(sleep_duration:cxx.Ref<Duration>):Void;
 
 	@:native("std::this_thread::get_id")
     public static overload extern function getID():Int;
