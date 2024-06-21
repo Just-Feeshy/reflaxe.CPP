@@ -1003,7 +1003,7 @@ class Classes extends SubCompiler {
 
 			// -----------------
 			// Get expression to compile
-			final bodyExpr = f.expr;
+			var bodyExpr = f.expr;
 
 			// To be added back, see TODO below...
 			// if(ctx.isConstructor) {
