@@ -1041,7 +1041,7 @@ class Classes extends SubCompiler {
 										}
 									}
 									case _: {
-										trace(ex);
+										// trace(ex);
 									}
 								}
 						}
