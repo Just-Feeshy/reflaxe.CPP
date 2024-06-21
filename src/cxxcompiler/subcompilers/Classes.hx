@@ -1030,7 +1030,8 @@ class Classes extends SubCompiler {
 								switch(ex.expr) {
 										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
 										switch(e2.expr) {
-										    case TConst(_): initExpressions.push(ex);
+										    case TConst(_):
+												initExpressions.push(ex);
 										    case _: {}
 										}
 
