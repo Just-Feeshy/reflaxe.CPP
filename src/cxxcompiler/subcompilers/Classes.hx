@@ -1017,7 +1017,7 @@ class Classes extends SubCompiler {
 			// -----------------
 			// Use initialization list to set _order_id in constructor.
 			final constructorInitFields = [];
-			var initExpressions:Array<haxe.macro.Expr.ExprDef> = [];
+			var initExpressions:Array<haxe.macro.Expr> = [];
 
 			if(ctx.isConstructor) {
 				if(!noAutogen) {
@@ -1027,11 +1027,12 @@ class Classes extends SubCompiler {
 				switch(bodyExpr.expr) {
 				    case TBlock(exprs): {
 						for(ex in exprs) {
+								trace($type(ex));
 								switch(ex.expr) {
 										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
 										switch(e2.expr) {
 										    case TConst(_):
-												initExpressions.push(ex);
+												// initExpressions.push(ex);
 										    case _: {}
 										}
 
