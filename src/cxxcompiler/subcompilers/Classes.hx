@@ -1076,6 +1076,8 @@ class Classes extends SubCompiler {
 			}
 
 			for(ex in constructorExpressions) {
+				trace("Hello");
+
 				//final name = ex.expr.expr.name;
 				switch(ex.expr) {
 				    case TConst(c): {
