@@ -1034,11 +1034,11 @@ class Classes extends SubCompiler {
 												constructorExpressions.push(e2);
 												cleanExpressions.remove(ex);
 											}
-										    case TNew(_, params, name): {
-												trace(name);
-											}
 										    case _: {}
 										}
+									}
+									case TNew(_, params, name): {
+										trace(name);
 									}
 									case _: {
 										// trace(ex);
