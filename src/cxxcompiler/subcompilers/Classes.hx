@@ -1037,8 +1037,8 @@ class Classes extends SubCompiler {
 										    case _: {}
 										}
 									}
-									case TNew(_, params, name): {
-										trace(name);
+									case TFunction(_): {
+										trace("Hello");
 									}
 									case _: {
 										// trace(ex);
