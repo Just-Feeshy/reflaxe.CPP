@@ -1023,18 +1023,24 @@ class Classes extends SubCompiler {
 
 				switch(bodyExpr.expr) {
 				    case TBlock(exprs): {
-						var cleanExpressions:Array<haxe.macro.TypedExpr> = [];
+						var cleanExpressions:Array<haxe.macro.TypedExpr> = exprs.copy();
 
 						for(ex in exprs) {
 								// trace($type(ex));
 								switch(ex.expr) {
-										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2) | TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
+								    case TBinop(OpAssign, {expr: TField({expr: TVar(TThis)}, name)}, e2): {
 										switch(e2.expr) {
-										    case TConst(_): constructorExpressions.push(e2);
-										    case _: cleanExpressions.push(ex);
+										    case TConst(_): {
+												constructorExpressions.push(e2);
+												cleanExpressions.remove(ex);
+											}
+										    case TVar(_): {
+												trace(name);
+											}
+										    case _: {}
 										}
 									}
-									case _: cleanExpressions.push(ex);
+									case _: {}
 								}
 						}
 
