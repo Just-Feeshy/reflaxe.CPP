@@ -1024,11 +1024,12 @@ class Classes extends SubCompiler {
 				}
 
 				switch(bodyExpr.expr) {
-				    case TBlock(e): {
-						for(ex in e) {
+				    case TBlock(exprs): {
+						for(ex in exprs) {
+								var name:String;
 								switch(ex.expr) {
-										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, _)}, e2): {
-										trace(ex.name);
+										case TBinop(OpAssign, TField({e: TConst(TThis)}, _), e2): {
+										trace(e2);
 									}
 									case _: {}
 								}
