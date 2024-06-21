@@ -1077,7 +1077,7 @@ class Classes extends SubCompiler {
 
 			for(ex in constructorExpressions) {
 				//final name = ex.expr.expr.name;
-				final value = ExprHelper.getConstString(ex);
+				final value = ExprHelper.getConstString(ex.expr);
 
 				trace(value);
 			}
