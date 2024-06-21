@@ -1072,7 +1072,8 @@ class Classes extends SubCompiler {
 			}
 
 			for(b in body) {
-				trace($type(b));
+				trace(b);
+				// trace($type(b));
 			}
 
 			if(superConstructorCall != null) {
