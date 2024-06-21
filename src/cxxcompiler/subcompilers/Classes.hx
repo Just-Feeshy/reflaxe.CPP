@@ -1080,7 +1080,7 @@ class Classes extends SubCompiler {
 
 				//final name = ex.expr.expr.name;
 				switch(ex.expr) {
-				    case TConst(TString(s, _)): trace(s);
+				    case TConst(TString(s)): trace(s);
 				    case _: {}
 				}
 
