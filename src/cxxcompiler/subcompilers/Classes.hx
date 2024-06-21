@@ -11,6 +11,7 @@ package cxxcompiler.subcompilers;
 
 import reflaxe.helpers.Context; // Use like haxe.macro.Context
 import haxe.macro.Type;
+import haxe.macro.Expr;
 
 import haxe.display.Display.MetadataTarget;
 
