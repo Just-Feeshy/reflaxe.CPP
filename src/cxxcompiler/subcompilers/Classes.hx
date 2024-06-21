@@ -1079,7 +1079,7 @@ class Classes extends SubCompiler {
 				//final name = ex.expr.expr.name;
 				switch(ex.expr) {
 				    case TConst(c): {
-						trace(ExprHelper.getConstString(c));
+						trace(c);
 					}
 				    case _: {}
 				}
