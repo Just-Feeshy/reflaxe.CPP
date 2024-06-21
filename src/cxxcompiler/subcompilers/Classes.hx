@@ -1028,10 +1028,9 @@ class Classes extends SubCompiler {
 						for(ex in exprs) {
 								// trace($type(ex));
 								switch(ex.expr) {
-										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
+										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis) | TLocal(TThis) }, name)}, e2): {
 										switch(e2.expr) {
 										    case TConst(_): constructorExpressions.push(e2);
-										    case TField(_, _): constructorExpressions.push(e2);
 										    case _: cleanExpressions.push(ex);
 										}
 									}
