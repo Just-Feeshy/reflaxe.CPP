@@ -1084,7 +1084,7 @@ class Classes extends SubCompiler {
 				    case _: {}
 				}
 
-				trace(value);
+				// trace(value);
 			}
 
 			XComp.pushTrackLines(useCallStack);
