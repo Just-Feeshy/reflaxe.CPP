@@ -1023,7 +1023,7 @@ class Classes extends SubCompiler {
 					constructorInitFields.push("_order_id(generate_order_id())");
 				}
 
-				switch(bodyExpr.expr) {
+				switch(bodyExpr) {
 				    case TBlock(e): {
 						for(ex in e) {
 								switch(ex.expr) {
