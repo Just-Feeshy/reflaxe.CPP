@@ -1076,15 +1076,10 @@ class Classes extends SubCompiler {
 			}
 
 			for(ex in constructorExpressions) {
-				trace("Hello");
 
 				//final name = ex.expr.expr.name;
-				switch(ex.expr) {
-				    case TConst(TString(s)): trace(s);
-				    case _: {}
-				}
 
-				// trace(value);
+				trace(ex.expr);
 			}
 
 			XComp.pushTrackLines(useCallStack);
