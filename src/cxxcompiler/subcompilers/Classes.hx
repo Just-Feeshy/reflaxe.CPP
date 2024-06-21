@@ -1010,14 +1010,10 @@ class Classes extends SubCompiler {
 			// 	XComp.startTrackingThisFields();
 			// }
 
-			XComp.pushTrackLines(useCallStack);
-			body.push(Main.compileClassFuncExpr(bodyExpr));
-			XComp.popTrackLines();
-
 			// -----------------
 			// Use initialization list to set _order_id in constructor.
-			final constructorInitFields = [];
-			var cancelledExpressions:Array<haxe.macro.TypedExpr> = [];
+			final constructorInitFields:Array<String> = [];
+			final constructorExpressions:Array<haxe.macro.TypedExpr> = [];
 
 			if(ctx.isConstructor) {
 				if(!noAutogen) {
@@ -1026,19 +1022,22 @@ class Classes extends SubCompiler {
 
 				switch(bodyExpr.expr) {
 				    case TBlock(exprs): {
+						var cleanExpressions:Array<haxe.macro.TypedExpr> = [];
+
 						for(ex in exprs) {
 								// trace($type(ex));
 								switch(ex.expr) {
 										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
 										switch(e2.expr) {
-										    case TConst(_):
-												cancelledExpressions.push(ex);
-										    case _: {}
+										    case TConst(_): constructorInitExpressions.push(ex);
+										    case _: cleanExpressions.push(ex);
 										}
 									}
-									case _: {}
+									case _: cleanExpressions.push(ex);
 								}
 						}
+
+						bodyExpr = { expr: TBlock(cleanExpressions) };
 					}
 				    case _: {}
 				}
@@ -1071,10 +1070,16 @@ class Classes extends SubCompiler {
 				// }
 			}
 
-			for(b in body) {
-				trace(b);
-				// trace($type(b));
+			for(ex in constructorInitExpressions) {
+				final name = ex.expr.expr.name;
+				final value = ex
+
+				trace(name + " = " + value);
 			}
+
+			XComp.pushTrackLines(useCallStack);
+			body.push(Main.compileClassFuncExpr(bodyExpr));
+			XComp.popTrackLines();
 
 			if(superConstructorCall != null) {
 				constructorInitFields.unshift(superConstructorCall);
