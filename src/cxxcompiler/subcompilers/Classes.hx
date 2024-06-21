@@ -1039,7 +1039,9 @@ class Classes extends SubCompiler {
 											}
 										}
 									}
-									case _: {}
+									case _: {
+										trace(ex);
+									}
 								}
 						}
 
