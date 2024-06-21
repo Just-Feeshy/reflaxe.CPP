@@ -1017,7 +1017,7 @@ class Classes extends SubCompiler {
 			// -----------------
 			// Use initialization list to set _order_id in constructor.
 			final constructorInitFields = [];
-			var initExpressions:Array<haxe.macro.ExprDef> = [];
+			var initExpressions:Array<haxe.macro.Expr.ExprDef> = [];
 
 			if(ctx.isConstructor) {
 				if(!noAutogen) {
