@@ -1023,6 +1023,13 @@ class Classes extends SubCompiler {
 					constructorInitFields.push("_order_id(generate_order_id())");
 				}
 
+				switch(bodyExpr) {
+				    case TBinop(OpAssign, TField(e, name), e2): {
+						trace("Hello World");
+					}
+				    case _: {}
+				}
+
 				// -----------------
 				// Generate field initializations in constructor
 				//
