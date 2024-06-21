@@ -1037,11 +1037,8 @@ class Classes extends SubCompiler {
 										    case _: {}
 										}
 									}
-									case TFunction(_): {
-										trace("Hello");
-									}
 									case _: {
-										// trace(ex);
+										trace(ex);
 									}
 								}
 						}
