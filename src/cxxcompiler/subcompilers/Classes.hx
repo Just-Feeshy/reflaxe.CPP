@@ -1081,6 +1081,7 @@ class Classes extends SubCompiler {
 				    case TConst(c): {
 						trace(ExprHelper.getConstString(c));
 					}
+				    case _: {}
 				}
 
 				trace(value);
