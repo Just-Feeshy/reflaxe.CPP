@@ -1075,10 +1075,10 @@ class Classes extends SubCompiler {
 			}
 
 			for(ex in constructorExpressions) {
-				final name = ex.expr.expr.name;
-				final value = ex;
+				//final name = ex.expr.expr.name;
+				final value = ExprHelper.getConstString(ex);
 
-				trace(name + " = " + value);
+				trace(value);
 			}
 
 			XComp.pushTrackLines(useCallStack);
