@@ -977,7 +977,7 @@ class Classes extends SubCompiler {
 					frontOptionalAssigns.push('if(!${arg.name}) ${arg.name} = ${XComp.compileExpressionForType(arg.expr, t)};');
 				}
 			}
-			
+
 			// -----------------
 			// Store every section of the function body C++ to be added to the function
 			final body = [];
@@ -1005,6 +1005,11 @@ class Classes extends SubCompiler {
 			// Get expression to compile
 			final bodyExpr = f.expr;
 
+			// To be added back, see TODO below...
+			// if(ctx.isConstructor) {
+			// 	XComp.startTrackingThisFields();
+			// }
+
 			XComp.pushTrackLines(useCallStack);
 			body.push(Main.compileClassFuncExpr(bodyExpr));
 			XComp.popTrackLines();
@@ -1012,9 +1017,38 @@ class Classes extends SubCompiler {
 			// -----------------
 			// Use initialization list to set _order_id in constructor.
 			final constructorInitFields = [];
-			
-			if(ctx.isConstructor && !noAutogen) {
-				constructorInitFields.push("_order_id(generate_order_id())");
+
+			if(ctx.isConstructor) {
+				if(!noAutogen) {
+					constructorInitFields.push("_order_id(generate_order_id())");
+				}
+
+				// -----------------
+				// Generate field initializations in constructor
+				//
+				// TODO:
+				// Don't use text processing here.
+				// Anaylze the `bodyExpr` TypedExpr above to get the class assignments.
+				// Then mark with a metadata like `@:reflaxeDontGenerate` and implement a-
+				// feature to ignore expressions with said metadata.
+
+
+				// Breaks too many tests, will add later...
+				// final thisFields = XComp.extractThisFields();
+				// while(thisFields.length > 0) {
+				// 	final name = thisFields.pop();
+				// 	var curBody = body[body.length - 1];
+
+				// 	for(line in curBody.split(";")) {
+				// 		var lineSeg = StringTools.replace(line, "\n", "");
+				// 		if(StringTools.startsWith(lineSeg, "this->" + name + " = ")) {
+				// 			final value = lineSeg.substring(("this->" + name + " = ").length, curBody.length - 1);
+
+				// 			constructorInitFields.push(name + "(" + value + ")");
+				// 			body[body.length - 1] = StringTools.replace(curBody, line + ";", "");
+				// 		}
+				// 	}
+				// }
 			}
 
 			if(superConstructorCall != null) {

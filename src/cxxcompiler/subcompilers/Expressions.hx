@@ -106,6 +106,22 @@ class Expressions extends SubCompiler {
 	}
 
 	// ----------------------------
+	// Stores field-access expressions that access from `this`.
+	// Used in the Class compiler to find fields assigned in the constructor.
+	// See TODO in Classes.hx
+	var thisFieldsAssigned: Null<Array<String>> = null;
+
+	public function startTrackingThisFields() {
+		thisFieldsAssigned = [];
+	}
+
+	public function extractThisFields() {
+		final result = thisFieldsAssigned;
+		thisFieldsAssigned = null;
+		return result;
+	}
+
+	// ----------------------------
 	// Small helper for wrapping C++ code to ensure it doesn't generate
 	// an "unused" warning/error.
 	function unusedCpp(cpp: Null<String>): Null<String> {
@@ -1342,11 +1358,17 @@ class Expressions extends SubCompiler {
 
 			// @:nativeVariableCode
 			final nvc = Main.compileNativeVariableCodeMeta(accessExpr, result);
-			return if(nvc != null) {
+			final output = if(nvc != null) {
 				nvc;
 			} else {
 				result;
 			}
+
+			if(thisFieldsAssigned != null && isThisExpr(e) && !thisFieldsAssigned.contains(name)) {
+				thisFieldsAssigned.push(name);
+			}
+
+			return output;
 		}
 	}
 
