@@ -1029,7 +1029,7 @@ class Classes extends SubCompiler {
 								switch(ex.expr) {
 										case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
 										switch(e2.expr) {
-										    case TConst(_): constructorInitExpressions.push(ex);
+										    case TConst(_): constructorExpressions.push(ex);
 										    case _: cleanExpressions.push(ex);
 										}
 									}
@@ -1037,7 +1037,11 @@ class Classes extends SubCompiler {
 								}
 						}
 
-						bodyExpr = { expr: TBlock(cleanExpressions) };
+						bodyExpr = {
+						    expr: TBlock(cleanExpressions),
+							pos: bodyExpr.pos,
+							t: bodyExpr.t
+						};
 					}
 				    case _: {}
 				}
