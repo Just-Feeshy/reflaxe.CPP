@@ -19,6 +19,7 @@ import reflaxe.data.ClassFuncData;
 import reflaxe.data.ClassVarData;
 import reflaxe.debug.MeasurePerformance;
 import reflaxe.input.ClassHierarchyTracker;
+import reflaxe.helpers.ExprHelper;
 
 using reflaxe.helpers.ArrayHelper;
 using reflaxe.helpers.BaseTypeHelper;
