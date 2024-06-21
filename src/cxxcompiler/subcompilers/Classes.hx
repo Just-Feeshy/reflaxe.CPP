@@ -1072,7 +1072,7 @@ class Classes extends SubCompiler {
 
 			for(ex in constructorInitExpressions) {
 				final name = ex.expr.expr.name;
-				final value = ex
+				final value = ex;
 
 				trace(name + " = " + value);
 			}
