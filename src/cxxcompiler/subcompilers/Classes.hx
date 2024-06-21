@@ -1074,7 +1074,7 @@ class Classes extends SubCompiler {
 				// }
 			}
 
-			for(ex in constructorInitExpressions) {
+			for(ex in constructorExpressions) {
 				final name = ex.expr.expr.name;
 				final value = ex;
 
