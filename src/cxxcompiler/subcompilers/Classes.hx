@@ -1043,6 +1043,7 @@ class Classes extends SubCompiler {
 												case TConst(c): {
 												    trace(c);
 												}
+												case _: {}
 											}
 										}
 									}
