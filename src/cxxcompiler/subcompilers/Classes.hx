@@ -1034,9 +1034,10 @@ class Classes extends SubCompiler {
 												constructorExpressions.push(e2);
 												cleanExpressions.remove(ex);
 											}
-										    case _: {
-												trace(e2);
+										    case TLocal(l): {
+												trace(l);
 											}
+										    case _: {}
 										}
 									}
 									case _: {
