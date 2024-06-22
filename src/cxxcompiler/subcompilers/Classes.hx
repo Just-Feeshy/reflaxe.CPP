@@ -1037,8 +1037,10 @@ class Classes extends SubCompiler {
 										    case _: {}
 										}
 									}
-								    case TCall(_, e): {
-										trace(e.expr);
+								    case TCall(_, exprs): {
+										for(e in exprs) {
+											trace(e);
+										}
 									}
 									case _: {
 										// trace(ex);
