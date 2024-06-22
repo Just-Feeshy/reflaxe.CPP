@@ -1034,18 +1034,8 @@ class Classes extends SubCompiler {
 												constructorExpressions.push(e2);
 												cleanExpressions.remove(ex);
 											}
-										    case _: {}
-										}
-									}
-								    case TCall(_, exprs): {
-										for(e in exprs) {
-											switch(e.expr) {
-												case TConst(c): {
-												    trace(c);
-												}
-												case _: {
-												    trace(e.expr);
-												}
+										    case _: {
+												trace(e2);
 											}
 										}
 									}
