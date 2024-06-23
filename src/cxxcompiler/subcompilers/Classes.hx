@@ -1042,7 +1042,7 @@ class Classes extends SubCompiler {
 														switch(c) {
 														    case TInt(v): Std.string(v);
 														    case TFloat(v): v;
-														    case TString(v): v;
+														    case TString(v): '"' + v + '"';
 														    case TBool(v): v ? "1" : "0";
 														    case _: "0";
 														}
