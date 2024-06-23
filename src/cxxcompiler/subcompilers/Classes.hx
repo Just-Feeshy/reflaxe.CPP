@@ -1040,7 +1040,7 @@ class Classes extends SubCompiler {
 												final value_raw = switch(e2.expr) {
 												    case TConst(c): {
 														switch(c) {
-														    case TInt(v): cast(Std.string(v), Int);
+														    case TInt(v): Std.string(v);
 														    case TFloat(v): v;
 														    case TString(v): v;
 														    case TBool(v): v ? "1" : "0";
