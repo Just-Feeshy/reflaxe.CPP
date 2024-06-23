@@ -1020,56 +1020,60 @@ class Classes extends SubCompiler {
 					constructorInitFields.push("_order_id(generate_order_id())");
 				}
 
-				switch(bodyExpr.expr) {
-				    case TBlock(exprs): {
-						var cleanExpressions:Array<haxe.macro.TypedExpr> = exprs.copy();
+				// -----------------
+				// Remove all assignments to `this->` fields in constructor body.
+				if(field.hasMeta(Meta.CppcList)) {
+						switch(bodyExpr.expr) {
+							case TBlock(exprs): {
+								var cleanExpressions:Array<haxe.macro.TypedExpr> = exprs.copy();
 
-						for(ex in exprs) {
-								// trace($type(ex));
-								switch(ex.expr) {
-								    case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
-										switch(e2.expr) {
-										    case TConst(_) | TLocal(_): {
-												cleanExpressions.remove(ex);
+								for(ex in exprs) {
+										// trace($type(ex));
+										switch(ex.expr) {
+											case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
+												switch(e2.expr) {
+													case TConst(_) | TLocal(_): {
+														cleanExpressions.remove(ex);
 
-												final name_raw = switch(name) {
-												    case FInstance(_, _, s): s;
-												    case _: null;
-												}
-
-												final value_raw = switch(e2.expr) {
-												    case TConst(c): {
-														switch(c) {
-														    case TInt(v): Std.string(v);
-														    case TFloat(v): v;
-														    case TString(v): '"' + v + '"';
-														    case TBool(v): v ? "1" : "0";
-														    case TNull: "nullptr";
-														    case _: "0";
+														final name_raw = switch(name) {
+															case FInstance(_, _, s): s;
+															case _: null;
 														}
+
+														final value_raw = switch(e2.expr) {
+															case TConst(c): {
+																switch(c) {
+																	case TInt(v): Std.string(v);
+																	case TFloat(v): v;
+																	case TString(v): '"' + v + '"';
+																	case TBool(v): v ? "1" : "0";
+																	case TNull: "nullptr";
+																	case _: "0";
+																}
+															}
+															case TLocal(v): v.name;
+															case _: { throw "Impossible"; }
+														}
+
+														constructorInitFields.push(name_raw + "(" + value_raw + ")");
 													}
-												    case TLocal(v): v.name;
-												    case _: { throw "Impossible"; }
+													case _: {}
 												}
-
-												constructorInitFields.push(name_raw + "(" + value_raw + ")");
 											}
-										    case _: {}
+											case _: {
+												// trace(ex);
+											}
 										}
-									}
-									case _: {
-										// trace(ex);
-									}
 								}
-						}
 
-						bodyExpr = {
-						    expr: TBlock(cleanExpressions),
-							pos: bodyExpr.pos,
-							t: bodyExpr.t
-						};
-					}
-				    case _: {}
+								bodyExpr = {
+									expr: TBlock(cleanExpressions),
+									pos: bodyExpr.pos,
+									t: bodyExpr.t
+								};
+							}
+							case _: {}
+						}
 				}
 
 				// -----------------
