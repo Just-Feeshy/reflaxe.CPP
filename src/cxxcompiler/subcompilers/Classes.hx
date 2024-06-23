@@ -1032,13 +1032,14 @@ class Classes extends SubCompiler {
 										    case TConst(_) | TLocal(_): {
 												cleanExpressions.remove(ex);
 
-												final name_raw:String = switch(name) {
+												final name_raw = switch(name) {
 												    case FInstance(_, _, s): s;
 												    case _: null;
 												}
 
-												trace("Name: " + name_raw);
-												trace("Value: " + e2);
+
+												trace("Name: " + name_raw.toString());
+												trace("Value: " + ExprTools.toString(e2.expr));
 											}
 										    case _: {}
 										}
