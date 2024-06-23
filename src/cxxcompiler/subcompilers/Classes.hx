@@ -1031,7 +1031,12 @@ class Classes extends SubCompiler {
 										switch(e2.expr) {
 										    case TConst(_) | TLocal(_): {
 												cleanExpressions.remove(ex);
-												var name_raw = name.toString();
+
+												final name_raw = switch(name) {
+												    case FInstance(_, _, s): s;
+												    case _: "";
+												}
+
 												trace("Name: " + name_raw);
 												trace("Value: " + e2);
 											}
