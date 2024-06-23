@@ -1075,33 +1075,6 @@ class Classes extends SubCompiler {
 							case _: {}
 						}
 				}
-
-				// -----------------
-				// Generate field initializations in constructor
-				//
-				// TODO:
-				// Don't use text processing here.
-				// Anaylze the `bodyExpr` TypedExpr above to get the class assignments.
-				// Then mark with a metadata like `@:reflaxeDontGenerate` and implement a-
-				// feature to ignore expressions with said metadata.
-
-
-				// Breaks too many tests, will add later...
-				// final thisFields = XComp.extractThisFields();
-				// while(thisFields.length > 0) {
-				// 	final name = thisFields.pop();
-				// 	var curBody = body[body.length - 1];
-
-				// 	for(line in curBody.split(";")) {
-				// 		var lineSeg = StringTools.replace(line, "\n", "");
-				// 		if(StringTools.startsWith(lineSeg, "this->" + name + " = ")) {
-				// 			final value = lineSeg.substring(("this->" + name + " = ").length, curBody.length - 1);
-
-				// 			constructorInitFields.push(name + "(" + value + ")");
-				// 			body[body.length - 1] = StringTools.replace(curBody, line + ";", "");
-				// 		}
-				// 	}
-				// }
 			}
 
 			XComp.pushTrackLines(useCallStack);
