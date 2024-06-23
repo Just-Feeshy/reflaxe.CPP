@@ -1048,6 +1048,7 @@ class Classes extends SubCompiler {
 														}
 													}
 												    case TLocal(v): v.name;
+												    case _: { throw "Impossible"; }
 												}
 
 												constructorInitFields.push(name_raw + "(" + value_raw + ")");
