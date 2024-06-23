@@ -11,7 +11,6 @@ package cxxcompiler.subcompilers;
 
 import reflaxe.helpers.Context; // Use like haxe.macro.Context
 import haxe.macro.Type;
-import haxe.macro.ExprTools;
 
 import haxe.display.Display.MetadataTarget;
 
@@ -1038,9 +1037,19 @@ class Classes extends SubCompiler {
 												    case _: null;
 												}
 
+												final value_raw = switch(e2) {
+												    case TConst(c): {
+														switch(c) {
+														    case TInt(v): v.toString();
+														    case TFloat(v): v;
+														    case TString(v): v;
+														    case TBool(v): v ? "1" : "0";
+														    case _: "0";
+														}
+													}
+												}
 
-												trace("Name: " + name_raw.toString());
-												trace("Value: " + ExprTools.toString(e2.expr));
+												constructorInitFields.push(name_raw + "(" + value_raw + ")");
 											}
 										    case _: {}
 										}
