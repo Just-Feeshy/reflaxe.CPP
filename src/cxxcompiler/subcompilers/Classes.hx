@@ -1047,7 +1047,7 @@ class Classes extends SubCompiler {
 														    case _: "0";
 														}
 													}
-												    case _: { trace(e2.expr); }
+												    case _: { trace(e2.expr); "0"; }
 												}
 
 												constructorInitFields.push(name_raw + "(" + value_raw + ")");
