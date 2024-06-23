@@ -1037,7 +1037,7 @@ class Classes extends SubCompiler {
 												    case _: null;
 												}
 
-												final value_raw = switch(e2) {
+												final value_raw = switch(e2.expr) {
 												    case TConst(c): {
 														switch(c) {
 														    case TInt(v): v.toString();
