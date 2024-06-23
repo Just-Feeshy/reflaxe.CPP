@@ -1044,6 +1044,7 @@ class Classes extends SubCompiler {
 														    case TFloat(v): v;
 														    case TString(v): '"' + v + '"';
 														    case TBool(v): v ? "1" : "0";
+														    case TNull: "nullptr";
 														    case _: "0";
 														}
 													}
