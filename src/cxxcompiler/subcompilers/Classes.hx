@@ -1032,7 +1032,7 @@ class Classes extends SubCompiler {
 										    case TConst(_) | TLocal(_): {
 												cleanExpressions.remove(ex);
 
-												final name_raw = switch(name) {
+												final name_raw:String = switch(name) {
 												    case FInstance(_, _, s): s;
 												    case _: null;
 												}
