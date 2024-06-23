@@ -1014,7 +1014,6 @@ class Classes extends SubCompiler {
 			// -----------------
 			// Use initialization list to set _order_id in constructor.
 			final constructorInitFields:Array<String> = [];
-			final constructorExpressions = [];
 
 			if(ctx.isConstructor) {
 				if(!noAutogen) {
@@ -1031,8 +1030,9 @@ class Classes extends SubCompiler {
 								    case TBinop(OpAssign, {expr: TField({expr: TConst(TThis)}, name)}, e2): {
 										switch(e2.expr) {
 										    case TConst(_) | TLocal(_): {
-												constructorExpressions.push(e2);
 												cleanExpressions.remove(ex);
+												trace("Name: " + name);
+												trace("Value: " + e2);
 											}
 										    case _: {}
 										}
@@ -1078,13 +1078,6 @@ class Classes extends SubCompiler {
 				// 		}
 				// 	}
 				// }
-			}
-
-			for(ex in constructorExpressions) {
-
-				//final name = ex.expr.expr.name;
-
-				trace(ex.expr);
 			}
 
 			XComp.pushTrackLines(useCallStack);
