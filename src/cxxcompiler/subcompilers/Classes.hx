@@ -1047,6 +1047,7 @@ class Classes extends SubCompiler {
 														    case _: "0";
 														}
 													}
+												    case _: { throw "Impossible"; }
 												}
 
 												constructorInitFields.push(name_raw + "(" + value_raw + ")");
