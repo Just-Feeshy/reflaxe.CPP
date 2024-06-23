@@ -1034,7 +1034,7 @@ class Classes extends SubCompiler {
 
 												final name_raw = switch(name) {
 												    case FInstance(_, _, s): s;
-												    case _: "";
+												    case _: null;
 												}
 
 												trace("Name: " + name_raw);
